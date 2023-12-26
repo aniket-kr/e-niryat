@@ -1,0 +1,200 @@
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<link rel="stylesheet" href="stylesheet.css">
+
+<section class="banner-area organic-breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+			<div class="col-first">
+				<h1>Hello <%= user.firstName %></h1>
+				<nav class="d-flex align-items-center">
+					<a href="index.ejs">Home<span class="lnr lnr-arrow-right"></span></a>
+					<a href="profile.ejs">Profile</a>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div class="main-content">
+  <% var user = session.role === 'BUYER' ? session.buyer : session.seller %>
+    <!-- Page content -->
+    <div class="container-fluid mt--7">
+        <div class="row">
+            <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0" style="margin-top: 20px;">
+                <div class="card card-profile shadow">
+                    <div class="row justify-content-center">
+                        <!-- <div class="col-lg-3 order-lg-2"> -->
+                            <div class="card-profile-image">
+                                <a href="profile.ejs">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSos8WJJwI6qi-oyEqumgt5myV32u4aP3FvUA&usqp=CAU"
+                                        class="rounded-circle">
+                                </a>
+                            </div>
+                        <!-- </div> -->
+                    </div>
+                    <!-- <% if (session.role != "SELLER") { %>
+                    <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                        <div class="d-flex justify-content-between">
+                            <a href="/myorders" class="btn btn-sm btn-info mr-4">My Orders</a>
+                            <a href="/cart" class="btn btn-sm btn-info mr-4 float-right">My Cart</a>
+                        </div>
+                    </div>
+                    <% } %> -->
+                    <!-- <div class="col-lg-6"> -->
+
+                        <div class="text-center">
+                            <h3>
+                               <span class="font-weight-light"><%=user.fullName%></span>
+                            </h3>
+                            <div class="h5 font-weight-300">
+                                <i class="ni location_pin mr-2"></i><%= session.role %>
+                            </div>
+                            <hr class="my-4">
+                            <p>Heyy!! I am <%= user.firstName %>. Happy to be a part of E-Niryat!</p>
+
+                        </div>
+                    <!-- </div> -->
+                </div>
+            </div>
+            <div class="col-xl-8 order-xl-1" style="margin-top: 20px;">
+                <div class="card shadow">
+                    <div class="card-header bg-white border-0">
+                        <div class="row align-items-center">
+                            <div class="col-4">
+                                <h3 class="mb-0">My account</h3>
+                            </div>
+                            <div class="col-8 text-right">
+                                <% if (session.role != "SELLER") { %>
+                                        <a href="/myorders" class="btn btn-sm btn-primary" style="width: 150px; height: 40px; margin-right: 10px; padding: 10px;">My Orders</a>
+                                        <a href="/cart" class="btn btn-sm btn-primary" style="width: 150px; height: 40px; margin-right: 10px; padding: 10px;">My Cart</a>
+                                <% } %>
+                              <button type="submit" value="submit" class="btn btn-sm btn-primary" style="width: 150px; height: 40px; margin-right: 20px;">Save Profile</button>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" id="profile_form">
+                            <h6 class="heading-small text-muted mb-4">User information</h6>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <!-- <div class="col-lg-6">
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-username">User ID</label>
+                                            <input type="text" id="input-username"
+                                                class="form-control form-control-alternative" placeholder="Userid" disabled
+                                                value="<%= userId %>" >
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-email">Email address</label>
+                                            <input type="email" id="input-email" value="<%= user.email%>"
+                                                class="form-control form-control-alternative"  disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-first-name">First name</label>
+                                            <input type="text" id="input-first-name"
+                                                class="form-control form-control-alternative" placeholder="First name"
+                                                value="<%= user.firstName%>" name="firstName">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-last-name">Last name</label>
+                                            <input type="text" id="input-last-name"
+                                                class="form-control form-control-alternative" placeholder="Last name"
+                                                value="<%= user.lastName%>" name="lastName">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-email">Email address</label>
+                                            <input type="email" id="input-email" value="<%= user.email%>"
+                                                class="form-control form-control-alternative"  disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4">
+                            <!-- Address -->
+                            <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-address">Address</label>
+                                            <input id="input-address"
+                                                class="form-control form-control-alternative" placeholder="Home Address"
+                                                value="<%= user.address%>" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-country">Postal code</label>
+                                            <input type="number" id="input-postal-code"
+                                                class="form-control form-control-alternative" placeholder="Postal code" value="<%= user.pinCode%>" name="pinCode">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4">
+                            <!-- Description -->
+                            <% if (session.role!="BUYER") { %>
+                                <h6 class="heading-small text-muted mb-4">About me</h6>
+                                <div class="pl-lg-4">
+                                <div class="row">
+                                  <div class="col-lg-4">
+                                      <div class="form-group focused">
+                                          <label class="form-control-label" for="input-codeIec">codeIec</label>
+                                          <input type="text" id="input-codeIec"
+                                              class="form-control form-control-alternative" placeholder="codeIec"
+                                              value="<%= user.codeIec%>" name="codeIec">
+                                      </div>
+                                  </div>
+
+                                  <div class="col-lg-4">
+                                      <div class="form-group">
+                                          <label class="form-control-label" for="input-codeAd">codeAd</label>
+                                          <input type="text" id="input-codeAd"
+                                              class="form-control form-control-alternative" placeholder="codeAd" value="<%= user.codeAd%>" name="codeAd">
+                                      </div>
+                                  </div>
+
+                                  <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="input-gstin">GSTin</label>
+                                        <input type="text" id="input-gstin"
+                                            class="form-control form-control-alternative" placeholder="gstin"
+                                            value="<%= user.gstin%>" name="gstin">
+                                    </div>
+                                  </div>
+
+                                  <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                      <label class="form-control-label" for="input-lutDocument">lutDocument</label>
+                                      <input type="text" id="input-lutDocument"
+                                          class="form-control form-control-alternative" placeholder="lutDocument"
+                                          value="<%= user.lutDocument%>" name="lutDocument">
+                                    </div>
+                                  </div>
+                                </div>
+                                <% }  %>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

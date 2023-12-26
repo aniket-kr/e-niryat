@@ -1,0 +1,109 @@
+<div>
+    <!-- Add the seller dashboard content here -->
+    <% let orders = [
+        {
+            "orderId": "ardd1234",
+            "customerName": "John col",
+            "totalAmount": 239,
+
+            "products": [ {"name": "saare", "quantity": 2} , {"name": "cup", "quantity": 7}]
+        },
+        {
+            "orderId": "bcdea1234",
+            "customerName": "avaya col",
+            "totalAmount": 500,
+
+            "products": [ {"name": "mug", "quantity": 5} , {"name": "bottol", "quantity": 2}]
+        }
+    ]; %>
+
+ <!-- seller-dashboard.ejs -->
+
+<div id="content">
+    <h1>Seller Dashboard</h1>
+
+    <div class="table-container">
+        <table id="ordersTable" class="orders-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Total Amount</th>
+                    <th>Products</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (orders.length === 0) { %>
+                    <tr>
+                        <td colspan="4">No orders available.</td>
+                    </tr>
+                <% } else { %>
+                    <% orders.forEach(order => { %>
+                        <tr class="order">
+                            <td><%= order.orderId %></td>
+                            <td><%= order.customerName %></td>
+                            <td>₹<%= order.totalAmount.toFixed(2) %></td>
+                            <td>
+                                <ul class="product-list">
+                                    <% order.products.forEach(product => { %>
+                                        <li><%= product.name %> - Quantity: <%= product.quantity %></li>
+                                    <% }); %>
+                                </ul>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    #content {
+        font-family: 'Arial', sans-serif;
+        background-color: #f5f5f5;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    .table-container {
+        overflow-x: auto;
+        margin-top: 20px;
+    }
+
+    .orders-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .orders-table th,
+    .orders-table td {
+        border: 1px solid #ddd;
+        padding: 15px;
+        text-align: left;
+    }
+
+    .orders-table th {
+        background-color: #f0f0f0;
+    }
+
+    .order .product-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .order .product-list li {
+        color: #333;
+        margin: 5px 0;
+    }
+</style>

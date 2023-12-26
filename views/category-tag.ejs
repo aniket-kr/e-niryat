@@ -1,0 +1,321 @@
+<!-- Start Banner Area -->
+<style>
+.highlighted {
+	background-color: #3693e4; /* Add your desired styling here */
+
+  }
+  .highlighted1 {
+	color: white !important
+  }
+
+  
+.filter-bar {
+  padding: 0px 20px 10px 20px;
+  background: linear-gradient(to bottom, #87bed2, #44b4dd);
+  opacity: 0.9;
+  color: rgb(0, 0, 0);
+}
+
+.sidebar-categories .head {
+    line-height: 76px;
+    background: linear-gradient(to bottom, #87bed2, #44b4dd); 
+  	opacity: 0.9; 
+    padding: 0 30px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+}
+
+.sidebar-filter .top-filter-head {
+    line-height: 60px;
+    background: linear-gradient(to bottom, #87bed2, #44b4dd);
+  	opacity: 0.9;
+    padding: 0 30px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+}
+</style>
+
+<section class="banner-area organic-breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+			<div class="col-first">
+				<h1>Shop Category page</h1>
+				
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Banner Area -->
+<div class="container" style="margin-top: 20px;">
+	<div class="row">
+		<div class="col-xl-3 col-lg-4 col-md-5">
+			<div class="sidebar-categories">
+				<div class="head">Browse Categories</div>
+				<ul class="main-categories">
+					<% tags.forEach(tag1 => { %>
+								<li class="main-nav-list child <%= tag1.slug === tag.slug  ? 'highlighted' : '' %>"><a href="/tags/<%= tag1.slug %>/products" class=" <%= tag1.slug === tag.slug  ? 'highlighted1' : '' %>"><%= tag1.label %></a></li>
+							<% }); %>
+				</ul>
+			</div>
+			<div class="sidebar-categories">
+				<div class="head">Price</div>
+				<ul class="main-categories">
+
+					<form id="price-filter-form" method="get" action="/productsFiltered">
+						<div class="price-range-area">
+								<div class="price">Price:</div>
+								<span>₹</span>
+								<input type="number" id="lower-value" name="minPrice" placeholder="Min" min="0" />
+								<div class="to">to</div>
+								<span>₹</span>
+								<input type="number" id="upper-value" name="maxPrice" placeholder="Max"min="0" />
+								<button type="submit" style="background-color: #4CAF50;
+								border: none;
+								color: white;
+								padding: 15px 32px;
+								text-align: center;
+								text-decoration: none;
+								display: inline-block;
+								font-size: 16px;
+								margin: 4px 2px;
+								cursor: pointer;">Apply Filter</button>
+					</form>
+
+				</ul>
+			</div>
+		</div>
+		<div class="col-xl-9 col-lg-8 col-md-7">
+			<!-- Start Filter Bar -->
+			<div class="filter-bar d-flex flex-wrap align-items-center">
+				<div class="sorting mr-auto">
+					<% const selectedLimit = limit; %>
+					<select onchange="window.location.href=this.value">
+						<option value="/tags/<%= tag.slug %>/products?limit=5&page=<%=page%>" <% if (selectedLimit === 5) { %> selected <% } %>>Show 5</option>
+						<option value="/tags/<%= tag.slug %>/products?limit=10&page=<%=page%>" <% if (selectedLimit === 10) { %> selected <% } %>>Show 10</option>
+						<option value="/tags/<%= tag.slug %>/products?limit=12&page=<%=page%>" <% if (selectedLimit === 12) { %> selected <% } %>>Show 12</option>
+					  </select>
+				</div>
+				<div class="pagination">
+				  <% const productsPerPage = limit; %>
+				  <% const totalProducts = total; %>
+				  <% const totalPages = Math.ceil(totalProducts / productsPerPage); %>
+				  <% const currentPage = page || 1; %>
+
+				  <a href="#" class="prev-arrow"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
+
+				  <% for (let page = 1; page <= totalPages; page++) { %>
+					<% if (page === currentPage) { %>
+					  <a href="/tags/<%= tag.slug %>/products?limit=<%=limit%>&page=<%=page%>" class="active"><%= page %></a>
+					<% } else { %>
+					  <a href="/tags/<%= tag.slug %>/products?limit=<%=limit%>&page=<%=page%>"><%= page %></a>
+					<% } %>
+				  <% } %>
+
+				  <a href="#" class="next-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+				</div>
+			  </div>
+
+			<!-- End Filter Bar -->
+			<!-- Start Best Seller -->
+			<section class="lattest-product-area pb-40 category-list">
+				<div class="row">
+					<!-- single product -->
+					<% products.forEach(product => { %>
+						<div class="col-lg-4 col-md-6">
+							<div class="single-product">
+							<img class="img-fluid" src="<%= product.images[0] %>" alt="<%= product.name %>">
+							<div class="product-details">
+								<h6><a href="/products/<%= product.slug %>"><%= product.name %></a></h6>
+								<div class="price">
+								<h6>₹<%= product.priceInInr.toFixed(2) %></h6>
+								<!-- You can add additional logic here for the discounted price if applicable -->
+								</div>
+								<div class="prd-bottom">
+								<!-- Add your own hrefs for the buttons -->
+								<a href="" class="social-info">
+									<span class="ti-bag"></span>
+									<p class="hover-text">add to bag</p>
+								</a>
+								<a href="" class="social-info">
+									<span class="lnr lnr-sync"></span>
+									<p class="hover-text">compare</p>
+								</a>
+								<a href="<div class="row">
+								<a href="/products/<%= product.slug %>" class="social-info">
+									<span class="lnr lnr-move"></span>
+									<p class="hover-text">view more</p>
+								</a>
+								</div>
+							</div>
+							</div>
+						</div>
+						<% }); %>
+				</div>
+			</section>
+			<!-- End Best Seller -->
+			<!-- Start Filter Bar -->
+			<div class="filter-bar d-flex flex-wrap align-items-center">
+				<div class="sorting mr-auto">
+					<select onchange="window.location.href=this.value">
+						<option value="/tags/<%= tag.slug %>/products?limit=5&page=<%=page%>">Show 5</option>
+						<option value="/tags/<%= tag.slug %>/products?limit=10&page=<%=page%>">Show 10</option>
+						<option value="/tags/<%= tag.slug %>/products?limit=12&page=<%=page%>">Show 12</option>
+					  </select>
+				</div>
+				<div class="pagination">
+				  <a href="#" class="prev-arrow"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
+
+				  <% for (let page = 1; page <= totalPages; page++) { %>
+					<% if (page === currentPage) { %>
+					  <a href="/tag/<%= tag.slug %>/products?limit=<%=limit%>&page=<%=page%>" class="active"><%= page %></a>
+					<% } else { %>
+					  <a href="/tag/<%= tag.slug %>/products?limit=<%=limit%>&page=<%=page%>"><%= page %></a>
+					<% } %>
+				  <% } %>
+
+				  <a href="#" class="next-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+				</div>
+			</div>
+			<!-- End Filter Bar -->
+		</div>
+	</div>
+</div>
+
+<!-- Start related-product Area -->
+<section class="related-product-area section_gap">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-6 text-center">
+				<div class="section-title">
+					<h1>Deals of the Week</h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+						magna aliqua.</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-9">
+				<div class="row">
+					<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+						<div class="single-related-product d-flex">
+							<a href="#"><img src="img/r1.jpg" alt=""></a>
+							<div class="desc">
+								<a href="#" class="title">Black lace Heels</a>
+								<div class="price">
+									<h6>$189.00</h6>
+									<h6 class="l-through">$210.00</h6>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+						<div class="single-related-product d-flex">
+							<a href="#"><img src="img/r2.jpg" alt=""></a>
+							<div class="desc">
+								<a href="#" class="title">Black lace Heels</a>
+								<div class="price">
+									<h6>$189.00</h6>
+									<h6 class="l-through">$210.00</h6>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+						<div class="single-related-product d-flex">
+							<a href="#"><img src="img/r3.jpg" alt=""></a>
+							<div class="desc">
+								<a href="#" class="title">Black lace Heels</a>
+								<div class="price">
+									<h6>$189.00</h6>
+									<h6 class="l-through">$210.00</h6>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+						<div class="single-related-product d-flex">
+							<a href="#"><img src="img/r5.jpg" alt=""></a>
+							<div class="desc">
+								<a href="#" class="title">Black lace Heels</a>
+								<div class="price">
+									<h6>$189.00</h6>
+									<h6 class="l-through">$210.00</h6>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+						<div class="single-related-product d-flex">
+							<a href="#"><img src="img/r6.jpg" alt=""></a>
+							<div class="desc">
+								<a href="#" class="title">Black lace Heels</a>
+								<div class="price">
+									<h6>$189.00</h6>
+									<h6 class="l-through">$210.00</h6>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+						<div class="single-related-product d-flex">
+							<a href="#"><img src="img/r7.jpg" alt=""></a>
+							<div class="desc">
+								<a href="#" class="title">Black lace Heels</a>
+								<div class="price">
+									<h6>$189.00</h6>
+									<h6 class="l-through">$210.00</h6>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-6">
+						<div class="single-related-product d-flex">
+							<a href="#"><img src="img/r9.jpg" alt=""></a>
+							<div class="desc">
+								<a href="#" class="title">Black lace Heels</a>
+								<div class="price">
+									<h6>$189.00</h6>
+									<h6 class="l-through">$210.00</h6>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-6">
+						<div class="single-related-product d-flex">
+							<a href="#"><img src="img/r10.jpg" alt=""></a>
+							<div class="desc">
+								<a href="#" class="title">Black lace Heels</a>
+								<div class="price">
+									<h6>$189.00</h6>
+									<h6 class="l-through">$210.00</h6>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-6">
+						<div class="single-related-product d-flex">
+							<a href="#"><img src="img/r11.jpg" alt=""></a>
+							<div class="desc">
+								<a href="#" class="title">Black lace Heels</a>
+								<div class="price">
+									<h6>$189.00</h6>
+									<h6 class="l-through">$210.00</h6>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="ctg-right">
+					<a href="#" target="_blank">
+						<img class="img-fluid d-block mx-auto" src="img/category/c5.jpg" alt="">
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End related-product Area -->

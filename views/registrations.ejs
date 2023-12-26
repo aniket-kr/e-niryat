@@ -1,0 +1,107 @@
+<section class="login_box_area section_gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login_box_img">
+                    <img class="img-fluid" src="img/login.jpg" alt="">
+                    <div class="hover">
+                        <h4>New to our website?</h4>
+                        <p>There are advances being made in science and technology every day, and a good example of this is the</p>
+                        <a class="primary-btn" href="/registration">Create an Account</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="login_form_inner">
+                    <h3>Create an Account</h3>
+                    <form class="row login_form" action="/registration" method="post" id="registrationForm">
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Full Name" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email ID" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label for="role">Select Role:</label>
+                            <!-- <select class="form-control" id="role" name="role" required> -->
+                            <select class="form-control" id="role" name="role" onchange="showAdditionalFields()">
+                                <option value="seller">Seller</option>
+                                <option value="buyer">Buyer</option>
+                            </select>
+                        </div>
+                        <div id="sellerFields" style="display: none;">
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="businessAddress" name="businessAddress" placeholder="Business Address" >
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label for="iecCode">IEC Code:</label>
+                                <input type="number" class="form-control" id="iecCode" name="iecCode" placeholder="IEC Code" >
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label for="adCode">AD Code:</label>
+                                <input type="number" class="form-control" id="adCode" name="adCode" placeholder="AD Code" >
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="gstInNumber" name="gstInNumber" placeholder="GSTIN Number" >
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label for="lutDocument">LUT Document:</label>
+                                <input type="file" class="form-control" id="lutDocument" name="lutDocument" >
+                            </div>
+
+                            <div class="col-md-12 form-group">
+                                <button type="button" class="btn btn-primary" onclick="authorizeDocuments()">Authorize Documents/Verification</button>
+                            </div>
+                        </div>
+                        <div id="buyerFields" style="display: none;">
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="address" name="address" placeholder="Address" >
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="companyName" name="companyName" placeholder="Company Name (Optional)">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input type="tel" class="form-control" id="contactNumber" name="contactNumber" placeholder="Contact Number" >
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-12 form-group">
+                            <button type="submit" value="submit" class="primary-btn">Create Account</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function showAdditionalFields() {
+        var roleSelect = document.getElementById("role");
+        var sellerFields = document.getElementById('sellerFields');
+        var buyerFields = document.getElementById('buyerFields');
+        if (roleSelect.value === 'seller') {
+            sellerFields.style.display = 'block';
+            buyerFields.style.display = 'none';
+        }
+        else if (roleSelect.value === 'buyer') {
+            buyerFields.style.display = 'block';
+            sellerFields.style.display = 'none';
+        } 
+        else {
+            buyerFields.style.display = "none";
+            sellerFields.style.display = "none";
+            }
+    };
+
+    function authorizeDocuments() {
+        // Add logic to handle document authorization for the seller
+        alert('Document authorization logic goes here.');
+    }
+</script>

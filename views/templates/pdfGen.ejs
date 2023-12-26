@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Generator</title>
+</head>
+<body>
+
+<table style="width: 100%; border-collapse: collapse;">*
+    <tr>
+        <td style="border: 1px solid black; padding: 8px; text-align: left;"><h1><%=deliveryMode%></h1></td>
+        <td style="border: 1px solid black; padding: 8px; text-align: left;"><b>Weight: <%=weight%></b> <span style="display: inline-block; margin-left: 40px;"></span><span style="display: inline-block; margin-left: 40px;"></span><span style="display: inline-block; margin-left: 40px;"></span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRueO-pbPiofNKGE6bdXjof0uA_yI_HnrZ4nZJOl4Qh5g&s"></td>
+    </tr>
+    <tr>
+        <th colspan="2" style="border: 1px solid black; background-color: #f2f2f2; text-align: center;"><h1>PRIORITY MAIL</h1></th>
+    </tr>
+    <tr>
+        <td colspan="2" style="border: 1px solid black; padding: 8px; text-align: left;">
+           <h3><b><%= sellerFullName%> <br><br>
+            <%= sellerAddress%>  <br><%= sellerPincode%>  <br><br>
+            Product Name: <%= productName%> <br>Product Quantity: <%= productQuantity%> <br>
+            <br><br>
+            Ship to: <%= buyerFullName%> <br><%= buyerAddress%>
+            <span style="display: inline-block; margin-left: 40px;"></span><%= buyerPincode%></b> </h3>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="border: 1px solid black; text-align: center;">
+            <img src="https://img.freepik.com/free-psd/barcode-illustration-isolated_23-2150584086.jpg?size=626&ext=jpg&ga=GA1.1.1546980028.1702684800&semt=ais" height="200" width="600">
+            <b><h2>3985 3857 2093 3811 4903</h2></b>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="border: 1px solid black; text-align: center;">
+            <h2>Tracking: <%=orderId%></h2>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

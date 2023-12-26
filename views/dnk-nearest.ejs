@@ -1,0 +1,122 @@
+<script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places"></script>
+
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Shopping Cart</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="category.html">Cart</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1>Nearest DNK Calculator</h1>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label for="address">Enter the address:</label>
+                <input type="text" class="form-control" id="address">
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-lg-12 text-center">
+            <button class="btn btn-primary" onclick="calculateShortestDistance()">Calculate Shortest Distance</button>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-lg-12">
+           <h3> <p>Location of the Nearest Dak Ghar Niryat Kendra : <b><span id="closestLocation"></span></b></p></h3>
+        </div>
+    </div>
+</div>
+
+        <script>
+            const MAPBOX_API_KEY = 'YOUR_MAPBOX_API_KEY'; // Replace with your Mapbox API key
+
+            async function calculateShortestDistance() {
+                const address = document.getElementById('address').value;
+
+                try {
+                    const coordinates = await getCoordinatesFromAddress(address);
+                    let closestLocation = findClosestLocation(coordinates);
+
+                    document.getElementById('closestLocation').textContent = closestLocation.name;
+                } catch (error) {
+                    console.error('Error fetching coordinates:', error);
+                }
+            }
+
+            async function getCoordinatesFromAddress(address) {
+                const endpoint = 'mapbox.places';
+                const accessToken = `pk.eyJ1IjoicHJhdGhhbXNoaXJuYXRoIiwiYSI6ImNscWRreXFrbTA5dmQya3RrYmNsNGttMnUifQ.FlzGaZPZZGTjoXQ4JBkFtA`;
+                const searchText = encodeURIComponent(address);
+                const apiUrl = `https://api.mapbox.com/geocoding/v5/${endpoint}/${searchText}.json?access_token=${accessToken}`;
+
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                if (data.features && data.features.length > 0) {
+                    const coordinates = data.features[0].geometry.coordinates;
+                    return { x: coordinates[0], y: coordinates[1] };
+                } else {
+                    throw new Error('Unable to fetch coordinates from the provided address.');
+                }
+            }
+
+            function calculateEuclideanDistance(point1, point2) {
+                const dx = point2.x - point1.x;
+                const dy = point2.y - point1.y;
+                return Math.sqrt(dx ** 2 + dy ** 2);
+            }
+
+            function findClosestLocation(source) {
+                const locations = [
+                    { name: 'Delhi', coordinates: { x: 77.2090057, y: 28.6138954 } },
+                    { name: 'Mumbai', coordinates: { x: 72.877393, y: 19.07599 } },
+                    { name: 'Kolkata', coordinates: { x: 88.363881, y: 22.572672 } },
+                    { name: 'Bengaluru', coordinates: { x: 77.5913, y: 12.97912 } },
+                    { name: 'Chennai', coordinates: { x: 80.270186, y: 13.083694 } },
+                    { name: 'Nagpur', coordinates: { x: 79.0821, y: 21.1498 } },
+                    { name: 'Patna', coordinates: { x: 85.123525, y: 25.609324 } },
+                    { name: 'Jaipur', coordinates: { x: 75.818982, y: 26.915458 } },
+                    { name: 'Mysuru', coordinates: { x: 76.655361, y: 12.305183 } },
+
+
+                    // Add more locations as needed
+                ];
+
+                let minDistance = Infinity;
+                let closestLocation = null;
+
+                for (const location of locations) {
+                    const distance = calculateEuclideanDistance(source, location.coordinates);
+                    console.log(location.name);
+                    console.log(distance);
+
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestLocation = location;
+                    }
+                }
+
+                return closestLocation;
+            }
+        </script>
+ 
+<!--================End Cart Area =================-->

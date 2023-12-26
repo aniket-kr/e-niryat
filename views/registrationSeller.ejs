@@ -1,0 +1,124 @@
+<style>
+    .radio-inputs {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      border-radius: 0.5rem;
+      background-color: #EEE;
+      box-sizing: border-box;
+      box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+      padding: 0.25rem;
+      width: 500px;
+      font-size: 14px;
+    }
+    
+    .radio-inputs .radio {
+      flex: 1 1 auto;
+      text-align: center;
+    }
+    
+    .radio-inputs .radio input {
+      display: none;
+    }
+    
+    .radio-inputs .radio .name {
+      display: flex;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.5rem;
+      border: none;
+      padding: .5rem 0;
+      color: rgba(51, 65, 85, 1);
+      transition: all .15s ease-in-out;
+    }
+    
+    .radio-inputs .radio input:checked + .name {
+      background-color: #fff;
+      font-weight: 600;
+    }
+    </style>
+    
+    <!-- Start Banner Area -->
+        <section class="banner-area organic-breadcrumb">
+            <div class="container">
+                <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                    <div class="col-first">
+                        <h1>Register as a Seller</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Banner Area -->
+    
+
+<section class="login_box_area section_gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login_box_img">
+                    <img class="img-fluid" src="/img/login.jpg" alt="">
+                    <div class="hover">
+                        <h4>New to our website?</h4>
+                        <p>There are advances being made in science and technology every day, and a good example of this is the</p>
+                        <a class="primary-btn" href="/auth/register/buyer">Create a Buyer Account</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="login_form_inner">
+                    <h3>Create an Account</h3>
+                    <form class="row login_form" action="/auth/register/seller" method="post" id="registrationForm">
+                        <div class="col-md-12 form-group">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email Id" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" required>
+                        </div>
+						<div class="col-md-12 form-group">
+                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Business Address" >
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" id="pinCode" name="pinCode" placeholder="Pincode" >
+                        </div>
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="codeIec" name="codeIec" placeholder="IEC Code" >
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="codeAd" name="codeAd" placeholder="AD Code" >
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="gstin" name="gstin" placeholder="GSTIN Number" >
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label for="lutDocument">LUT Document:</label>
+                                <input type="file" class="form-control" id="lutDocument" name="lutDocument" >
+                            </div>
+
+                            <div class="col-md-12 form-group">
+                                <button type="button" class="btn btn-primary" onclick="authorizeDocuments()">Authorize Documents/Verification</button>
+                            </div>
+
+
+                        <div class="col-md-12 form-group">
+                            <button type="submit" value="submit" class="primary-btn">Create Account</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function authorizeDocuments() {
+        // Add logic to handle document authorization for the seller
+        alert('Document authorization logic goes here.');
+    }
+</script>

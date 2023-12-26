@@ -1,0 +1,513 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<style>
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .form-align {
+        margin-top: 20px;
+    }
+
+    /* input,
+    .form-align {
+        margin-top: 20px;
+    }
+
+    /* input,
+    textarea {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        background-color: #f8f9fa;
+        color: #495057;
+    } */
+
+    .button-container {
+        width: 100%;
+        background-color: #28a745;
+        color: #ffffff;
+    }
+
+    input[type="file"] {
+        display: none;
+        /* Hide the file input */
+        display: none;
+        /* Hide the file input */
+    }
+
+    .custom-file-upload {
+        border: 1px solid #ced4da;
+        display: inline-block;
+        padding: 8px 12px;
+        cursor: pointer;
+        background-color: #f8f9fa;
+        color: #495057;
+        border-radius: 4px;
+    }
+
+    button {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #218838;
+    }
+
+    .multiselect {
+        width: 200px;
+        margin-bottom: 15px;
+    }
+
+    .selectBox {
+        position: relative;
+    }
+
+    .selectBox select {
+        width: 100%;
+        font-weight: bold;
+    }
+
+    .overSelect {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    #checkboxes {
+        display: none;
+        border: 1px #dadada solid;
+        overflow-y: auto;
+        max-height: 150px;
+        background-color: #fff;
+        border-radius: 4px;
+    }
+
+    #checkboxes label {
+        display: block;
+        padding: 8px 12px;
+        cursor: pointer;
+    }
+
+    #checkboxes label:hover {
+        background-color: #f8f9fa;
+    }
+</style>
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Add Your Product</h1>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="row">
+
+    <div class="col-lg-6 d-flex align-items-center justify-content-center" style="margin-top: 50px; padding: 20px;">
+        <form action="/products" method="POST">
+            <div class="row">
+                <div class="form-align col-lg-6">
+                    <label for="productName">Product Name:</label>
+                </div>
+                <div class="form-align col-lg-6">
+                    <input type="text" class="form-control" id="productName" name="name" required>
+                </div>
+            </div>
+
+<div class="container">
+    <form action="/products" method="POST">
+        <!-- Product Name -->
+        <div class="form-group">
+            <label for="productName">Product Name:</label>
+            <input type="text" class="form-control" id="productName" name="name" required>
+        </div>
+
+        <!-- Images (file input) -->
+        <label for="imageUpload" class="custom-file-upload">
+            Attach Images
+            <input type="file" id="imageUpload" name="imageUpload" accept="image/*" required onchange="previewImage()">
+        </label>
+
+        <!-- Display the uploaded image -->
+        <img id="imagePreview" alt="Image Preview" height="340" style="aspect-ratio: 1/1;">
+
+        <!-- Price in INR -->
+        <div class="form-group">
+            <label for="priceInInr">Price (INR):</label>
+            <input type="number" class="form-control" id="priceInInr" name="priceInInr" required>
+        </div>
+
+        <!-- Product Description -->
+        <div class="form-group">
+            <label for="description">Product Description:</label>
+            <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="weight">Weight:</label>
+                <input type="number" min="1" class="form-control" id="weight" name="weight" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="width">Width:</label>
+                <input type="number" min="1" class="form-control" id="width" name="width" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="height">Height:</label>
+                <input type="number" class="form-control" id="height" name="height" required>
+            </div>
+        </div>
+        <!-- HS Code -->
+        <div class="form-group">
+            <label for="hsCode">HS Code:</label>
+            <input type="text" class="form-control" id="hsCode" name="hsCode" required>
+        </div>
+
+        <div class="multiselect">
+            <div class="selectBox" onclick="showCheckboxes()">
+              <select>
+                <option>Select Tags</option>
+              </select>
+              <div class="overSelect"></div>
+            </div>
+            <div id="checkboxes">
+              <label for="1">
+              <input type="checkbox" id="1" />First checkbox</label>
+            </div>
+          </div>
+          <br>
+          <br>
+          <br>
+=======
+            <!-- Price in INR -->
+            <div class="row">
+                <div class="form-align col-lg-6">
+                    <label for="priceInInr">Price (INR):</label>
+                </div>
+                <div class="form-align col-lg-6">
+                    <input type="number" class="form-control" id="priceInInr" name="priceInInr" required>
+                </div>
+            </div>
+>>>>>>> newcss:views/product-listing.ejs
+
+
+            <!-- Product Description -->
+            <div class="row">
+                <div class="form-align col-lg-6">
+                    <label for="description">Product Description:</label>
+                </div>
+                <div class="form-align col-lg-6">
+                    <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                </div>
+            </div>
+
+            <div class="row form-align">
+                <div class=" col-md-4">
+                    <label for="weight">Weight:</label>
+                    <input type="number" min="1" class="form-control" id="weight" name="weight" required>
+                </div>
+                <div class=" col-md-4">
+                    <label for="width">Width:</label>
+                    <input type="number" min="1" class="form-control" id="width" name="width" required>
+                </div>
+                <div class=" col-md-4">
+                    <label for="height">Height:</label>
+                    <input type="number" class="form-control" id="height" name="height" required>
+                </div>
+            </div>
+            <!-- HS Code -->
+            <div class="row form-align ">
+
+                <div class="col-lg-6">
+                    <label for="hsCode">HS Code:</label>
+                </div>
+                <div class="col-lg-6">
+                    <input type="text" class="form-control" id="hsCode" name="hsCode" required>
+                </div>
+            </div>
+
+            <!-- HTML code with a new div to show selected items -->
+            <div class="row form-align">
+            <div class="custom-multiselect col-lg-6">
+                <div class="multiselect-label" onclick="showCheckboxes()">
+                    <div class="multiselect-select">
+                        <span>Select labels</span>
+                    </div>
+                    <div class="multiselect-overSelect"></div>
+                </div>
+                <div class="multiselect-checkboxes">
+                    <label class="multiselect-checkbox-label" for="one">
+                        <input type="checkbox" id="one" value="op1" onchange="handleCheckboxChange(this)" /> Shoe
+                    </label>
+                    <label class="multiselect-checkbox-label" for="two">
+                        <input type="checkbox" id="two" value="op2" onchange="handleCheckboxChange(this)" /> Shirt
+                    </label>
+                    <label class="multiselect-checkbox-label" for="three">
+                        <input type="checkbox" id="three" value="op3" onchange="handleCheckboxChange(this)" /> Kurta
+                    </label>
+                    <!-- Add more checkboxes as needed -->
+                </div>
+            </div>
+            <div class="col-lg-6" id="selectedItems"></div>
+        </div>
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <!-- Product Description -->
+            <div class="row">
+                <div class="form-align col-lg-6">
+                    <label for="description">Product Description:</label>
+                </div>
+                <div class="form-align col-lg-6">
+                    <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                </div>
+            </div>
+
+            <div class="row form-align">
+                <div class=" col-md-4">
+                    <label for="weight">Weight:</label>
+                    <input type="number" min="1" class="form-control" id="weight" name="weight" required>
+                </div>
+                <div class=" col-md-4">
+                    <label for="width">Width:</label>
+                    <input type="number" min="1" class="form-control" id="width" name="width" required>
+                </div>
+                <div class=" col-md-4">
+                    <label for="height">Height:</label>
+                    <input type="number" class="form-control" id="height" name="height" required>
+                </div>
+            </div>
+            <!-- HS Code -->
+            <div class="row form-align ">
+
+                <div class="col-lg-6">
+                    <label for="hsCode">HS Code:</label>
+                </div>
+                <div class="col-lg-6">
+                    <input type="text" class="form-control" id="hsCode" name="hsCode" required>
+                </div>
+            </div>
+
+            <!-- HTML code with a new div to show selected items -->
+            <div class="row form-align">
+            <div class="custom-multiselect col-lg-6">
+                <div class="multiselect-label" onclick="showCheckboxes()">
+                    <div class="multiselect-select">
+                        <span>Select labels</span>
+                    </div>
+                    <div class="multiselect-overSelect"></div>
+                </div>
+                <div class="multiselect-checkboxes">
+                    <label class="multiselect-checkbox-label" for="one">
+                        <input type="checkbox" id="one" value="op1" onchange="handleCheckboxChange(this)" /> Shoe
+                    </label>
+                    <label class="multiselect-checkbox-label" for="two">
+                        <input type="checkbox" id="two" value="op2" onchange="handleCheckboxChange(this)" /> Shirt
+                    </label>
+                    <label class="multiselect-checkbox-label" for="three">
+                        <input type="checkbox" id="three" value="op3" onchange="handleCheckboxChange(this)" /> Kurta
+                    </label>
+                    <!-- Add more checkboxes as needed -->
+                </div>
+            </div>
+            <div class="col-lg-6" id="selectedItems"></div>
+        </div>
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <!-- <div class="form-group col-lg-4">
+            <label for="labelsCheckboxes">Labels:</label>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="label1" name="labels[]" value="Label1">
+                <label class="form-check-label" for="label1">Label 1</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="label2" name="labels[]" value="Label2">
+                <label class="form-check-label" for="label2">Label 2</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="label3" name="labels[]" value="Label3">
+                <label class="form-check-label" for="label3">Label 3</label>
+            </div>
+
+        </div> -->
+
+
+            <!-- Submit Button Container -->
+            <div class="button-container">
+                <button type="submit" class="button-container">Add Product</button>
+            </div>
+            <br>
+            <br>
+        </form>
+    </div>
+    <div class="col-lg-6" style="padding: 200px;">
+        <label for="imageUpload" class="custom-file-upload">
+            Attach Images
+            <input type="file" id="imageUpload" name="imageUpload" accept="image/*" required onchange="previewImage()">
+            <img id="imagePreview" alt="" height="340" style="aspect-ratio: 1/1;">
+        </label>
+    </div>
+
+</div>
+            <!-- Submit Button Container -->
+            <div class="button-container">
+                <button type="submit" class="button-container">Add Product</button>
+            </div>
+            <br>
+            <br>
+        </form>
+    </div>
+    <div class="col-lg-6" style="padding: 200px;">
+        <label for="imageUpload" class="custom-file-upload">
+            Attach Images
+            <input type="file" id="imageUpload" name="imageUpload" accept="image/*" required onchange="previewImage()">
+            <img id="imagePreview" alt="" height="340" style="aspect-ratio: 1/1;">
+        </label>
+    </div>
+
+</div>
+
+
+<script>
+    // JavaScript to preview the selected image
+    function previewImage() {
+        var fileInput = document.getElementById('imageUpload');
+        var imagePreview = document.getElementById('imagePreview');
+
+        // Check if a file is selected
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+            reader.onload = function (e) {
+                // Display the preview image
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block';
+            };
+
+            // Read the file as a data URL
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+    // $(document).ready(function () {
+    //     $('#labelsDropdown').multiselect({
+    //         includeSelectAllOption: true,
+    //         enableFiltering: true,
+    //         maxHeight: 200
+    //     });
+    // });
+    // $(document).ready(function () {
+    //     $('#labelsDropdown').selectpicker();
+    // });
+    var expanded = false;
+
+    function showCheckboxes() {
+    var checkboxes = document.getElementById("checkboxes");
+    if (!expanded) {
+        checkboxes.style.display = "block";
+        expanded = true;
+    } else {
+        checkboxes.style.display = "none";
+        expanded = false;
+    }
+    }
+</script>
+
+<!-- JavaScript code -->
+<script>
+    function handleCheckboxChange(checkbox) {
+        if (checkbox.checked) {
+            // If checkbox is checked, append the selected item to the new div
+            appendSelectedItem(checkbox.value);
+        } else {
+            // If checkbox is unchecked, remove the selected item from the new div
+            removeSelectedItem(checkbox.value);
+        }
+    }
+
+    function appendSelectedItem(item) {
+        // Create a new div element for the selected item
+        var selectedItemsContainer = document.getElementById('selectedItems');
+        var newItem = document.createElement('div');
+        newItem.textContent = item;
+        newItem.classList.add('selected-item');
+
+        // Append the new div to the selected items container
+        selectedItemsContainer.appendChild(newItem);
+    }
+
+    function removeSelectedItem(item) {
+        // Remove the div element corresponding to the deselected item
+        var selectedItemsContainer = document.getElementById('selectedItems');
+        var selectedItems = selectedItemsContainer.querySelectorAll('.selected-item');
+        selectedItems.forEach(function (selectedItem) {
+            if (selectedItem.textContent === item) {
+                selectedItemsContainer.removeChild(selectedItem);
+            }
+        });
+    }
+</script>
+
+<!-- JavaScript code -->
+<script>
+    function handleCheckboxChange(checkbox) {
+        if (checkbox.checked) {
+            // If checkbox is checked, append the selected item to the new div
+            appendSelectedItem(checkbox.value);
+        } else {
+            // If checkbox is unchecked, remove the selected item from the new div
+            removeSelectedItem(checkbox.value);
+        }
+    }
+
+    function appendSelectedItem(item) {
+        // Create a new div element for the selected item
+        var selectedItemsContainer = document.getElementById('selectedItems');
+        var newItem = document.createElement('div');
+        newItem.textContent = item;
+        newItem.classList.add('selected-item');
+
+        // Append the new div to the selected items container
+        selectedItemsContainer.appendChild(newItem);
+    }
+
+    function removeSelectedItem(item) {
+        // Remove the div element corresponding to the deselected item
+        var selectedItemsContainer = document.getElementById('selectedItems');
+        var selectedItems = selectedItemsContainer.querySelectorAll('.selected-item');
+        selectedItems.forEach(function (selectedItem) {
+            if (selectedItem.textContent === item) {
+                selectedItemsContainer.removeChild(selectedItem);
+            }
+        });
+    }
+}
+</script>

@@ -1,0 +1,41 @@
+{
+  "name": "eniryat-server",
+  "version": "0.1.0",
+  "description": "",
+  "private": true,
+  "main": "bin/www",
+  "scripts": {
+    "format": "prettier --write \"./**/*.js\"",
+    "start": "nodemon bin/www -e js,ejs",
+    "seed": "node seeder.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-ejs-layouts": "^2.5.1",
+    "express-fileupload": "^1.3.1",
+    "express-session": "^1.17.3",
+    "http-errors": "^2.0.0",
+    "mongodb": "^4.6.0",
+    "mongoose": "^6.3.4",
+    "puppeteer": "^21.6.1",
+    "slugify": "^1.6.6",
+    "twilio": "^4.20.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.3.1",
+    "nodemon": "^2.0.22",
+    "prettier": "^3.1.1"
+  },
+  "author": {
+    "name": "Aniket Kumar",
+    "email": "aniket24kr@gmail.com"
+  },
+  "license": "UNLICENSED"
+}
